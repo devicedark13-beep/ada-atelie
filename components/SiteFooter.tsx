@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { isSupabaseConfigured } from "@/lib/supabase";
+import { whatsAppQuoteUrl } from "@/lib/whatsapp";
 
 export function SiteFooter() {
   const connected = isSupabaseConfigured();
@@ -16,9 +17,9 @@ export function SiteFooter() {
         <Link href="/empresas" className="hover:text-clay">
           O ateliê
         </Link>
-        <Link href="/orcamento" className="hover:text-clay">
+        <a href={whatsAppQuoteUrl()} target="_blank" rel="noopener noreferrer" className="hover:text-clay">
           Orçamento
-        </Link>
+        </a>
         <a href="https://wa.me/c/553173353097" className="hover:text-clay">
           Catálogo no WhatsApp
         </a>

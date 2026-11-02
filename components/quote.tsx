@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { whatsAppQuoteUrl } from "@/lib/whatsapp";
 
 const KEY = "ada-quote-slugs";
 
@@ -36,31 +37,30 @@ export function addQuoteSlug(slug: string) {
   window.dispatchEvent(new Event("ada-quote"));
 }
 
-export function QuoteButton({ slug }: { slug: string }) {
-  const slugs = useQuoteSlugs();
-  const added = slugs.includes(slug);
-
+export function QuoteButton({ name }: { name: string }) {
   return (
-    <button
-      type="button"
-      onClick={() => addQuoteSlug(slug)}
+    <a
+      href={whatsAppQuoteUrl(name)}
+      target="_blank"
+      rel="noopener noreferrer"
       className="mt-3 inline-flex items-center gap-2 rounded bg-quote px-4 py-1.5 text-sm font-semibold text-white"
     >
-      {added ? "No orçamento" : "Orçar"}
+      Orçar
       <CartIcon />
-    </button>
+    </a>
   );
 }
 
 export function HeaderCart() {
-  const slugs = useQuoteSlugs();
-
   return (
-    <a href="/orcamento" className="relative grid h-11 w-11 place-items-center text-white" aria-label="Orçamentos">
+    <a
+      href={whatsAppQuoteUrl()}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="relative grid h-11 w-11 place-items-center text-white"
+      aria-label="Orçamento no WhatsApp"
+    >
       <CartIcon large />
-      <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-quote px-1 text-xs font-bold text-white">
-        {slugs.length}
-      </span>
     </a>
   );
 }

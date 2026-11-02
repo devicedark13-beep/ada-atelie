@@ -38,7 +38,7 @@ export function ProductCard({
       <p className="mt-2 text-sm text-neutral-800">{priceLine(product)}</p>
       <p className="mt-1 text-xs uppercase tracking-wide text-neutral-500">{categoryName}</p>
       <div className="mt-auto">
-        <QuoteButton slug={product.slug} />
+        <QuoteButton name={product.name} />
       </div>
     </article>
   );

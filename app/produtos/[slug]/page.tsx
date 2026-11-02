@@ -6,6 +6,7 @@ import { CatalogFallback } from "@/components/CatalogBits";
 import { ProductArt } from "@/components/ProductArt";
 import { ProductCard } from "@/components/ProductCard";
 import { QuoteButton } from "@/components/quote";
+import { whatsAppQuoteUrl } from "@/lib/whatsapp";
 import { categoryOf, companyOf, getCatalog, productOf } from "@/lib/catalog";
 import { formatBRL } from "@/lib/format";
 
@@ -98,10 +99,15 @@ async function ProductContent({ params }: { params: Promise<{ slug: string }> })
               </div>
             ))}
           </dl>
-          <QuoteButton slug={product.slug} />
-          <Link href="/orcamento" className="ml-4 text-sm text-clay hover:underline">
-            Ver orçamento
-          </Link>
+          <QuoteButton name={product.name} />
+          <a
+            href={whatsAppQuoteUrl(product.name)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-4 text-sm text-clay hover:underline"
+          >
+            Pedir no WhatsApp
+          </a>
         </div>
       </div>
       {related.length > 0 ? (

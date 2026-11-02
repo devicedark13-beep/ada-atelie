@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 type Option = { slug: string; name: string; companyName: string };
 
 const field =
@@ -14,38 +12,19 @@ export function QuoteForm({
   products: Option[];
   initialSlug?: string;
 }) {
-  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
-  const [detail, setDetail] = useState("");
-
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
-    setStatus("sending");
-    setDetail("");
-    try {
-      const response = await fetch("/api/orcamentos", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const payload = (await response.json()) as { ok: boolean; storage?: string; error?: string };
-      if (!response.ok || !payload.ok) {
-        setStatus("error");
-        setDetail(payload.error || "Não foi possível enviar o pedido.");
-        return;
-      }
-      setStatus("ok");
-      setDetail(
-        payload.storage === "supabase"
-          ? "Pedido salvo no Supabase, na tabela quotes. Abra o painel do banco para ler os dados."
-          : "Pedido guardado neste computador, na pasta data. Quando o Supabase estiver ligado, os próximos vão para o banco.",
-      );
-      form.reset();
-    } catch {
-      setStatus("error");
-      setDetail("A conexão falhou. Tente de novo.");
-    }
+    const data = Object.fromEntries(new FormData(event.currentTarget).entries());
+    const product = products.find((item) => item.slug === data.productSlug);
+    const lines = [
+      "Olá! Quero um orçamento.",
+      data.name ? `Nome: ${data.name}` : "",
+      product ? `Produto: ${product.name}` : "",
+      data.quantity ? `Quantidade: ${data.quantity}` : "",
+      data.customization ? `Personalização: ${data.customization}` : "",
+      data.message ? `Mensagem: ${data.message}` : "",
+    ].filter(Boolean);
+    window.location.href = `https://wa.me/5531973353097?text=${encodeURIComponent(lines.join("\n"))}`;
   }
 
   return (
@@ -97,15 +76,9 @@ export function QuoteForm({
         Mensagem
         <textarea name="message" rows={4} className={field} />
       </label>
-      <button
-        disabled={status === "sending"}
-        className="rounded bg-quote px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"
-      >
-        {status === "sending" ? "Enviando..." : "Enviar pedido"}
+      <button className="rounded bg-quote px-5 py-3 text-sm font-semibold text-white">
+        Pedir no WhatsApp
       </button>
-      {detail ? (
-        <p className={status === "error" ? "text-sm text-clay-dark" : "text-sm text-moss"}>{detail}</p>
-      ) : null}
     </form>
   );
 }
