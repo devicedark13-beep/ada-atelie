@@ -4,37 +4,37 @@
       "slug": "kits",
       "name": "Kits",
       "description": "Kits prontos para presentear, com as peças do mesmo tema.",
-      "tone": "#1f1a17"
+      "tone": "#4b1d63"
     },
     {
       "slug": "chaveiros",
       "name": "Chaveiros e bottons",
       "description": "Chaveiros, imãs e bottons para lembrança.",
-      "tone": "#1787c9"
+      "tone": "#8c6a1f"
     },
     {
       "slug": "papelaria",
       "name": "Papelaria",
       "description": "Calendários, agendas, etiquetas e cartões feitos sob medida.",
-      "tone": "#8c5a3c"
+      "tone": "#6b3f7a"
     },
     {
       "slug": "canecas",
       "name": "Canecas",
       "description": "Canecas temáticas com foto, imagem ou mensagem.",
-      "tone": "#c4522a"
+      "tone": "#c7a33d"
     },
     {
       "slug": "casa",
       "name": "Casa",
       "description": "Azulejos personalizados em vários tamanhos.",
-      "tone": "#6b4c3b"
+      "tone": "#341150"
     },
     {
       "slug": "festas",
       "name": "Festas",
       "description": "Caixas e personalizados para datas e celebrações.",
-      "tone": "#8d3d55"
+      "tone": "#7a2f55"
     }
   ],
   "companies": [

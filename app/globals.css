@@ -2,16 +2,17 @@
 
 @theme inline {
   --font-sans: var(--font-outfit);
-  --color-ink: #333333;
-  --color-paper: #f5f6f8;
+  --font-display: var(--font-playfair);
+  --color-ink: #241a2e;
+  --color-paper: #faf6ee;
   --color-cream: #ffffff;
-  --color-clay: #1787c9;
-  --color-clay-dark: #0e679c;
-  --color-moss: #5ea31a;
-  --color-sand: #e7eef3;
-  --color-line: #e5e5e5;
-  --color-portal: #00aae8;
-  --color-quote: #7ed321;
+  --color-clay: #4b1d63;
+  --color-clay-dark: #2e1140;
+  --color-moss: #4f7942;
+  --color-sand: #f3e8cf;
+  --color-line: #e7dab9;
+  --color-portal: #341150;
+  --color-quote: #c7a33d;
 }
 
 body {

@@ -20,25 +20,30 @@ export function ProductCard({
   categoryName: string;
 }) {
   return (
-    <article className="flex h-full flex-col border border-line bg-white px-4 pb-5 pt-3 text-center">
-      <Link href={`/produtos/${product.slug}`}>
-        <ProductArt
-          palette={product.palette}
-          kicker={categoryName}
-          image={product.image}
-          alt={product.name}
-        />
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white transition hover:-translate-y-1 hover:shadow-xl hover:shadow-clay/10">
+      <Link href={`/produtos/${product.slug}`} className="relative block overflow-hidden bg-sand/40">
+        <span className="absolute left-3 top-3 z-10 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide text-clay">
+          {categoryName}
+        </span>
+        <div className="transition duration-300 group-hover:scale-105">
+          <ProductArt
+            palette={product.palette}
+            kicker={categoryName}
+            image={product.image}
+            alt={product.name}
+          />
+        </div>
       </Link>
-      <h3 className="mt-2 text-sm leading-5 text-clay">
-        <Link href={`/produtos/${product.slug}`} className="hover:underline">
-          <span aria-hidden="true">🎁 </span>
-          {product.name}
-        </Link>
-      </h3>
-      <p className="mt-2 text-sm text-neutral-800">{priceLine(product)}</p>
-      <p className="mt-1 text-xs uppercase tracking-wide text-neutral-500">{categoryName}</p>
-      <div className="mt-auto">
-        <QuoteButton name={product.name} />
+      <div className="flex flex-1 flex-col px-4 pb-4 pt-3">
+        <h3 className="text-sm font-medium leading-5 text-ink">
+          <Link href={`/produtos/${product.slug}`} className="hover:text-clay">
+            {product.name}
+          </Link>
+        </h3>
+        <p className="mt-1.5 text-sm font-semibold text-clay">{priceLine(product)}</p>
+        <div className="mt-auto">
+          <QuoteButton name={product.name} />
+        </div>
       </div>
     </article>
   );

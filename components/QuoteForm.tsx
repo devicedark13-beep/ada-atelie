@@ -76,7 +76,7 @@ export function QuoteForm({
         Mensagem
         <textarea name="message" rows={4} className={field} />
       </label>
-      <button className="rounded bg-quote px-5 py-3 text-sm font-semibold text-white">
+      <button className="rounded-full bg-quote px-5 py-3 text-sm font-semibold text-clay-dark transition hover:brightness-95">
         Pedir no WhatsApp
       </button>
     </form>

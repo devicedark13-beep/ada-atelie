@@ -43,7 +43,7 @@ export function QuoteButton({ name }: { name: string }) {
       href={whatsAppQuoteUrl(name)}
       target="_blank"
       rel="noopener noreferrer"
-      className="mt-3 inline-flex items-center gap-2 rounded bg-quote px-4 py-1.5 text-sm font-semibold text-white"
+      className="mt-3 inline-flex items-center gap-2 rounded-full bg-quote px-4 py-1.5 text-sm font-semibold text-clay-dark transition hover:brightness-95"
     >
       Orçar
       <CartIcon />
@@ -64,6 +64,8 @@ export function HeaderCart() {
     </a>
   );
 }
+
+export { CartIcon };
 
 export function BasketList({
   products,
