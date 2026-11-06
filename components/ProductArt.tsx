@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { parseImageList } from "@/lib/format";
 
 function Placeholder({ kicker }: { kicker: string }) {
   return (
@@ -26,20 +27,22 @@ export function ProductArt({
   alt?: string;
   large?: boolean;
 }) {
-  const [failed, setFailed] = useState(false);
+  const candidates = parseImageList(image);
+  const [index, setIndex] = useState(0);
   const imgRef = useRef<HTMLImageElement>(null);
   const frame = large ? "h-[32rem]" : "h-80";
+  const src = candidates[index];
 
   // A pre-rendered <img> can finish failing before React hydrates and
   // attaches onError, so also check the already-settled state on mount.
   useEffect(() => {
     const el = imgRef.current;
     if (el && el.complete && el.naturalWidth === 0) {
-      setFailed(true);
+      setIndex((current) => current + 1);
     }
-  }, [image]);
+  }, [src]);
 
-  if (!image || failed) {
+  if (!src) {
     return (
       <div className={`${frame} w-full`}>
         <Placeholder kicker={kicker} />
@@ -50,11 +53,12 @@ export function ProductArt({
   return (
     <div className={`${frame} w-full overflow-hidden bg-white`}>
       <img
+        key={src}
         ref={imgRef}
-        src={image}
+        src={src}
         alt={alt || kicker}
         className="h-full w-full object-contain"
-        onError={() => setFailed(true)}
+        onError={() => setIndex((current) => current + 1)}
       />
     </div>
   );

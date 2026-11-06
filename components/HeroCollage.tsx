@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { parseImageList } from "@/lib/format";
 
 type CollageProduct = { slug: string; name: string; image?: string };
 
@@ -13,23 +14,34 @@ function CollagePhoto({
   index: number;
   onFail: (slug: string) => void;
 }) {
+  const candidates = parseImageList(product.image);
+  const [candidateIndex, setCandidateIndex] = useState(0);
   const imgRef = useRef<HTMLImageElement>(null);
+  const src = candidates[candidateIndex];
+
+  // No candidate left to try (or none to begin with): drop this slot.
+  useEffect(() => {
+    if (!src) onFail(product.slug);
+  }, [src, product.slug, onFail]);
 
   // A pre-rendered <img> can finish failing before React hydrates and
   // attaches onError, so also check the already-settled state on mount.
   useEffect(() => {
     const el = imgRef.current;
     if (el && el.complete && el.naturalWidth === 0) {
-      onFail(product.slug);
+      setCandidateIndex((current) => current + 1);
     }
-  }, [product.slug, onFail]);
+  }, [src]);
+
+  if (!src) return null;
 
   return (
     <img
+      key={src}
       ref={imgRef}
-      src={product.image}
+      src={src}
       alt={product.name}
-      onError={() => onFail(product.slug)}
+      onError={() => setCandidateIndex((current) => current + 1)}
       className="absolute h-56 w-44 rounded-2xl border-4 border-white/90 object-cover shadow-2xl"
       style={{
         left: `${index * 28}%`,

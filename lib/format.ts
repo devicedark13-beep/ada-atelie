@@ -21,3 +21,12 @@ export function letterOf(name: string) {
   const base = fold(name).charAt(0).toUpperCase();
   return /[A-Z]/.test(base) ? base : "#";
 }
+
+/** Product `image` fields can hold a gallery as `url1|url2|url3`. */
+export function parseImageList(value?: string) {
+  if (!value) return [];
+  return value
+    .split("|")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
