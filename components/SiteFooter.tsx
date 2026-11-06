@@ -28,8 +28,8 @@ export function SiteFooter() {
     <footer className="mt-16 border-t border-line bg-portal text-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div>
-          <div className="inline-block rounded-xl bg-white/95 p-2">
-            <img src="/logo.jpg" alt="Ad Ateliê — ateliê do seu jeito" className="h-14 w-auto object-contain" />
+          <div className="inline-block rounded-xl bg-white/95 p-3">
+            <img src="/logo-mark.jpg" alt="Ad Ateliê — ateliê do seu jeito" className="h-20 w-auto object-contain" />
           </div>
           <p className="mt-4 max-w-xs text-sm leading-6 text-white/70">
             Presentes e personalizados feitos sob medida, com acabamento artesanal. Ateliê do seu jeito.

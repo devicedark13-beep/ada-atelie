@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { CatalogFallback } from "@/components/CatalogBits";
+import { HeroCollage } from "@/components/HeroCollage";
 import { ProductCard } from "@/components/ProductCard";
 import { categoryOf, companyOf, getCatalog } from "@/lib/catalog";
 import { whatsAppQuoteUrl } from "@/lib/whatsapp";
@@ -79,25 +80,7 @@ async function HomeContent() {
             </div>
           </div>
 
-          {collage.length > 0 && (
-            <div className="relative mx-auto hidden h-80 w-full max-w-md sm:block">
-              {collage.map((product, index) => (
-                <div
-                  key={product.slug}
-                  role="img"
-                  aria-label={product.name}
-                  className="absolute h-56 w-44 overflow-hidden rounded-2xl border-4 border-white/90 bg-white bg-cover bg-center shadow-2xl"
-                  style={{
-                    backgroundImage: `url(${product.image})`,
-                    left: `${index * 28}%`,
-                    top: index === 1 ? "0" : "2rem",
-                    transform: `rotate(${(index - 1) * 7}deg)`,
-                    zIndex: index === 1 ? 2 : 1,
-                  }}
-                />
-              ))}
-            </div>
-          )}
+          <HeroCollage products={collage} />
         </div>
       </section>
 

@@ -17,9 +17,9 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
         <Link href="/" className="flex shrink-0 items-center gap-2">
           <img
-            src="/logo.jpg"
+            src="/logo-mark.jpg"
             alt="Ad Ateliê — ateliê do seu jeito"
-            className="h-12 w-auto rounded-md object-contain sm:h-14"
+            className="h-16 w-auto object-contain sm:h-20"
           />
         </Link>
 
