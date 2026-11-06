@@ -13,9 +13,12 @@ export function ProductArt({
   if (image) {
     const frame = large ? "h-[32rem]" : "h-80";
     return (
-      <div className={`flex ${frame} items-center justify-center bg-white`}>
-        <img src={image} alt={alt || kicker} className={`${frame} w-full object-contain`} />
-      </div>
+      <div
+        role="img"
+        aria-label={alt || kicker}
+        className={`${frame} w-full overflow-hidden bg-white bg-contain bg-center bg-no-repeat`}
+        style={{ backgroundImage: `url(${image})` }}
+      />
     );
   }
 

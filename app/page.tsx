@@ -31,7 +31,11 @@ export default function HomePage() {
 async function HomeContent() {
   const catalog = await getCatalog();
   const featured = catalog.products.filter((product) => product.featured).slice(0, 6);
-  const collage = featured.slice(0, 3);
+  const withImage = catalog.products.filter((product) => product.image);
+  const collage = [...featured, ...withImage]
+    .filter((product) => product.image)
+    .filter((product, index, all) => all.findIndex((item) => item.slug === product.slug) === index)
+    .slice(0, 3);
 
   return (
     <div>
@@ -75,22 +79,25 @@ async function HomeContent() {
             </div>
           </div>
 
-          <div className="relative mx-auto hidden h-80 w-full max-w-md sm:block">
-            {collage.map((product, index) => (
-              <img
-                key={product.slug}
-                src={product.image}
-                alt={product.name}
-                className="absolute h-56 w-44 rounded-2xl border-4 border-white/90 object-cover shadow-2xl"
-                style={{
-                  left: `${index * 28}%`,
-                  top: index === 1 ? "0" : "2rem",
-                  transform: `rotate(${(index - 1) * 7}deg)`,
-                  zIndex: index === 1 ? 2 : 1,
-                }}
-              />
-            ))}
-          </div>
+          {collage.length > 0 && (
+            <div className="relative mx-auto hidden h-80 w-full max-w-md sm:block">
+              {collage.map((product, index) => (
+                <div
+                  key={product.slug}
+                  role="img"
+                  aria-label={product.name}
+                  className="absolute h-56 w-44 overflow-hidden rounded-2xl border-4 border-white/90 bg-white bg-cover bg-center shadow-2xl"
+                  style={{
+                    backgroundImage: `url(${product.image})`,
+                    left: `${index * 28}%`,
+                    top: index === 1 ? "0" : "2rem",
+                    transform: `rotate(${(index - 1) * 7}deg)`,
+                    zIndex: index === 1 ? 2 : 1,
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
